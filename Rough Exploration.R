@@ -26,7 +26,7 @@ horses
 
 ## Select for Specific Rows
 
-table <- select(horses, taxonID, order, family, genus, specificEpithet)
+table <- select(horses, taxonID, genus, specificEpithet)
 table
 
 
@@ -40,7 +40,7 @@ equus_africanus$data
 
 ## Removing irrelevant columns from the equus africanus table
 
-africanus <- select(equus_africanus$data, decimalLatitude, decimalLongitude, stateProvince, year, month, day, eventDate)
+africanus <- select(equus_africanus$data, decimalLatitude, decimalLongitude, stateProvince)
 africanus
 
 ## locating all occurrences of equus kiang
@@ -51,7 +51,7 @@ equus_kiang$data
 
 ## Removing irrelevant columns from the equus kiang table
 
-kiang <- select(equus_kiang$data, decimalLatitude, decimalLongitude, stateProvince, year, month, day, eventDate)
+kiang <- select(equus_kiang$data, decimalLatitude, decimalLongitude, stateProvince)
 kiang
 
 ## locating all equus quagga
@@ -62,7 +62,7 @@ equus_quagga$data
 
 ## Removing irrelevant columns from the equus quagga table
 
-quagga <- select(equus_quagga$data, scientificName, decimalLatitude, decimalLongitude, stateProvince, year, month, day, eventDate)
+quagga <- select(equus_quagga$data, scientificName, decimalLatitude, decimalLongitude, stateProvince)
 quagga
 
 ## locating all equus grevyi
@@ -73,7 +73,7 @@ equus_grevyi$data
 
 ## Removing irrelevant columns from the equus grevyi table
 
-grevyi <- select(equus_grevyi$data, scientificName, decimalLatitude, decimalLongitude, stateProvince, year, month, day, eventDate)
+grevyi <- select(equus_grevyi$data, scientificName, decimalLatitude, decimalLongitude, stateProvince)
 grevyi
 
 ## locating all equus ferus
@@ -84,7 +84,7 @@ equus_ferus$data
 
 ## Removing irrelevant columns from the equus ferus table
 
-ferus <- select(equus_ferus$data, scientificName, decimalLatitude, decimalLongitude, stateProvince, year, month, day, eventDate)
+ferus <- select(equus_ferus$data, scientificName, decimalLatitude, decimalLongitude, stateProvince)
 ferus
 
 ## locating all equus zebra
@@ -95,8 +95,8 @@ equus_zebra$data
 
 ## Removing irrelevant columns from the equus zebra table
 
-zebra <- select(equus_zebra$data, scientificName, decimalLatitude, decimalLongitude, stateProvince, year, month, day, eventDate)
-zebra
+zebra <- select(equus_zebra$data, scientificName, decimalLatitude, decimalLongitude, stateProvince)
+
 
 ## locating all equus hemionus
 
@@ -106,7 +106,7 @@ equus_hemionus$data
 
 ## Removing irrelevant columns from the hemionus kiang table
 
-hemionus <- select(equus_hemionus$data, scientificName, decimalLatitude, decimalLongitude, stateProvince, year, month, day, eventDate)
+hemionus <- select(equus_hemionus$data, scientificName, decimalLatitude, decimalLongitude, stateProvince)
 hemionus
 
 ## combine all tables
