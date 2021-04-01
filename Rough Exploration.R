@@ -1,11 +1,16 @@
 ## Installing Packages
 
 install.packages("rgbif")
+install.packages("sf")
+install.packages("maps")
 
 ## Reading in Packages
 
 library(tidyverse)
 library(rgbif)
+library(sf)
+library(maps)
+library(dplyr)
 
 ## Reading in Data
 
@@ -149,12 +154,28 @@ Hem
 Y<- bind_rows(Afr, Kia, Qua, Gre, Fer, Zeb, Hem)
 Y
 
-tbl <- count(tbl, year, country)
+tbl <- count(Y, year, country)
 tbl
 
 tbl2 <- arrange(tbl, desc(country))
 tbl2
 
+## 2020 data
+
+tbl3 <- filter(tbl2, year == "2020")
+tbl3
+
+tbl4 <- rename(tbl3, region = country)
+tbl4
+
+## 2010 data
+
+
+tbl5 <- filter(tbl2, year == "2010")
+tbl5
+
+tbl6 <- rename(tbl5, region = country)
+tbl6
 
 ## count the year occurrences
 
@@ -174,5 +195,34 @@ ggplot(data = Y_occurrences) +
     axis.ticks.x = element_blank()
   )
 
+## make a base map
 
-[Insert Bar graph of state prov by year]
+World <- map_data("world")
+World
+
+
+ggplot() + 
+  geom_polygon( data=World, aes(x=long, y=lat, group=group),
+                color="black", fill="lightblue" )
+
+## merge map and occurrence data 2020
+
+Merged <- left_join(World, tbl4, by = "region")
+Merged
+
+p <- ggplot()
+map <- p + geom_polygon( data=Merged, 
+              aes(x=long, y=lat, group=group, fill = n), 
+              color="white", size = 0.2) 
+map
+
+## merge and occurence data map of 2010
+
+Merged2 <- left_join(World, tbl6, by = "region")
+Merged2
+
+p <- ggplot()
+map <- p + geom_polygon( data=Merged2, 
+                         aes(x=long, y=lat, group=group, fill = n), 
+                         color="white", size = 0.2) 
+map

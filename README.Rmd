@@ -65,3 +65,10 @@ URL http://www.rstudio.com/.E
 
 (American Wild Horse Campaign, 2020) *** CITE FULLY ***
 https://americanwildhorsecampaign.org/wild-horses-and-ecosystem
+
+Pebesma, E., 2018. Simple Features for R: Standardized Support for Spatial Vector Data. The R
+Journal 10 (1), 439-446, https://doi.org/10.32614/RJ-2018-009
+
+Original S code by Richard A. Becker, Allan R. Wilks. R version by Ray Brownrigg. Enhancements
+by Thomas P Minka and Alex Deckmyn. (2018). maps: Draw Geographical Maps. R package version
+3.3.0. https://CRAN.R-project.org/package=maps
