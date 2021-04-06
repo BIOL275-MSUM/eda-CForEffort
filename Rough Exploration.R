@@ -154,28 +154,19 @@ Hem
 Y<- bind_rows(Afr, Kia, Qua, Gre, Fer, Zeb, Hem)
 Y
 
-tbl <- count(Y, year, country)
-tbl
-
-tbl2 <- arrange(tbl, desc(country))
-tbl2
-
-## 2020 data
-
-tbl3 <- filter(tbl2, year == "2020")
-tbl3
-
-tbl4 <- rename(tbl3, region = country)
-tbl4
-
-## 2010 data
-
-
-tbl5 <- filter(tbl2, year == "2010")
-tbl5
-
-tbl6 <- rename(tbl5, region = country)
-tbl6
+tbl <- 
+  Y %>% 
+  count(year, country) %>% 
+  arrange(desc(country)) %>% 
+  rename(region = country) %>% 
+  mutate(
+    region = str_replace(region, "United States of America", "USA"),
+    region = str_replace(region, "Tanzania, United Republic of", "Tanzania"),
+    region = str_replace(region, "Iran (Islamic Republic of)", "Iran"),
+    region = str_replace(region, "United Kingdom of Great Britain and Northern Ireland", "UK"),
+    region = str_replace(region, "Eswatini", "Swaziland")
+  ) %>% 
+  print()
 
 ## count the year occurrences
 
@@ -205,24 +196,40 @@ ggplot() +
   geom_polygon( data=World, aes(x=long, y=lat, group=group),
                 color="black", fill="lightblue" )
 
+# find unmatched countries
+
+
+Ver2 <- anti_join(tbl, World, by = "region")
+Ver2
+
+distinct(World, region) %>% arrange(region) %>%  pull(region)
+
 ## merge map and occurrence data 2020
 
-Merged <- left_join(World, tbl4, by = "region")
+Merged <- left_join(World, tbl, by = "region")
 Merged
 
-p <- ggplot()
-map <- p + geom_polygon( data=Merged, 
-              aes(x=long, y=lat, group=group, fill = n), 
-              color="white", size = 0.2) 
-map
+
+filter(Ver2, is.na(group))
+
+distinct(Ver2, region)
+
+Merged %>% 
+  filter(year == "2020" | is.na(year)) %>% 
+  ggplot() +
+  geom_polygon(
+    mapping = aes(x = long, y=lat, group=group, fill = n), 
+    color = "black", size = 0.2
+  )
+
+
 
 ## merge and occurence data map of 2010
 
-Merged2 <- left_join(World, tbl6, by = "region")
-Merged2
-
-p <- ggplot()
-map <- p + geom_polygon( data=Merged2, 
-                         aes(x=long, y=lat, group=group, fill = n), 
-                         color="white", size = 0.2) 
-map
+Merged %>% 
+  filter(year == "2010" | is.na(year)) %>% 
+  ggplot() +
+  geom_polygon(
+    mapping = aes(x = long, y=lat, group=group, fill = n), 
+    color = "black", size = 0.2
+  )

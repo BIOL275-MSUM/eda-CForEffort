@@ -2,7 +2,7 @@ Geographic Distribution Trends Compared to Extinction Risk of Mammals on
 the IUCN Red List
 ================
 Faith
-2021-03-25
+2021-04-06
 
 ## Abstract
 
@@ -24,6 +24,35 @@ significance of the occurrences between 2010 and 2020.
 
 ## Introduction
 
+Since the rise of human kind, drastic changes have begun occurring on
+the planet. One such thing is the rapid climb in extinction rates for
+non-human organisms. Some estimates show that humans have begun causing
+extinctions so quickly, that species are going extinct before anyone was
+able to ever note their existence. It is now understood to a large
+degree that biodiversity is crucial to the health of the planet, and in
+some ways directly connected to the health of humans. Every species has
+a niche that they fill, and some of them hold crucial roles. In regards
+to this study, equines hold an important role in grassland ecology. They
+help control populations of plants by keeping them grazed down, some of
+which are undesireable weeds that choke out other plants. Furthermore,
+due to the structure of the equine digestive system they release some of
+the plant’s seeds back into nature through their excreted waste.
+Furthermore, their grazing habits allow them to travel farther distances
+from water than most ruminants or other grazers, allowing them to graze
+in areas that are drier. By grazing in these areas, they are able to
+keep the greenery from growing too rampantly, and running the risk of a
+fire. (American Wild Horse Campaign, 2020) In the case of the seven
+equine species on the red list, all originate in areas of Asia where
+weather in certain areas can be harsh and dry. Thus, they play a crucial
+role in natural fire prevention for their countries of origin.
+Unfortunately, for various reasons, their populations declined enough to
+warrant their placement on the IUCN Red List. These species have been on
+the Red List for several years now, and attention has been brought to
+their status. This analysis will now serve to look at this effort–among
+other existing efforts–to help revive the population to determine if
+there is a significance in the change of equine populations over the
+last decade.
+
 ## Methods
 
 ### Data Acquisition
@@ -44,10 +73,9 @@ could be accessed. Furthermore, the data from the IUCN List had to be
 manually dropped into the project folder once downloaded. There were
 three files, but only the file labeled taxon.txt contained relevant
 information. Once the file was in the project folder, it could be read
-in and transformed into a tibble using the read\_tsv(“\[file name\]”)
-function from the tibble package (Muller and Wickham, 2020). This
-imported the data in a manner that would allow for more convenient
-analysis and modification in the future.
+in and transformed into a tibble using the tibble package (Muller and
+Wickham, 2020). This imported the data in a manner that would allow for
+more convenient analysis and modification in the future.
 
 Finally, the occurrence data for each of the seven species were acquired
 using the function with the amount limit being set at its maximum to
@@ -74,29 +102,35 @@ Once the occurrence data was acquired, it had to undergo several changes
 to make it more usable. Firstly, the data had to be transformed from a
 RGBIF format to a tibble format. Once the data set was placed into
 tibble format, unnecessary columns were removed. The columns that
-remained were the scientific Name, the Latitude, the Longitude, the
-year, and the state province. Once all of the species were refined,
-their individual tibbles were combined into a master tibble that would
-allow for collection of all occurrences to be seen together.
+remained were the scientific Name, the the year, and the country. Once
+all of the species were refined, their individual tibbles were combined
+into a master tibble that would allow for collection of all occurrences
+to be seen together.
 
-Due to several “not applicable” values, the longitude, latitude and
-scientific name were removed from the tibble. This left the state
-province, year, and the number of occurrences remaining.
+The tibbles were combined to list the number of occurrences by country
+and year.
 
-Finally, due to discrepancies in how each state province was named–such
-as capitalization, use of unique characters, and abbreviations–the data
-was manipulated to make all the naming styles uniform. This allowed for
+Finally, due to discrepancies in how each country was named–such as
+capitalization, use of unique characters, and abbreviations–the data was
+manipulated to make all the naming styles uniform. This allowed for
 cleaning appearances in the graph, and more accurate representation of
 the distribution of the seven species.
 
 Once all the data was organized in a manner that could allow
-visualization, a bar graph was used to depict the occurrence numbers in
-relation to state provinces for two different years that were 10 years
-apart. A second bar graph was created to depict overall trends in
-occurrences between the two years. A t-test was then performed to
-determine if the differences between the two years was significant.
+visualization, a bar graph was used to depict the occurrence numbers for
+both 2010 and 2020. Two maps were then created to depict a visual
+distribution of occurrences for both years. A t-test was then performed
+to determine if the differences between the two years was significant.
+
+![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
 
 ## Results
+
+![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+
+![](README_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
+
+![](README_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
 
 ## Discussion
 
@@ -130,3 +164,15 @@ package version 3.0.4. <https://CRAN.R-project.org/package=tibble>
 
 RStudio Team (2020). RStudio: Integrated Development Environment for R.
 RStudio, PBC, Boston, MA URL <http://www.rstudio.com/.E>
+
+(American Wild Horse Campaign, 2020) \*\*\* CITE FULLY \*\*\*
+<https://americanwildhorsecampaign.org/wild-horses-and-ecosystem>
+
+Pebesma, E., 2018. Simple Features for R: Standardized Support for
+Spatial Vector Data. The R Journal 10 (1), 439-446,
+<https://doi.org/10.32614/RJ-2018-009>
+
+Original S code by Richard A. Becker, Allan R. Wilks. R version by Ray
+Brownrigg. Enhancements by Thomas P Minka and Alex Deckmyn. (2018).
+maps: Draw Geographical Maps. R package version 3.3.0.
+<https://CRAN.R-project.org/package=maps>

@@ -5,6 +5,10 @@ date: "`r format(Sys.Date())`"
 output: github_document
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, results = FALSE, message=FALSE, warning=FALSE)
+```
+
 ## Abstract
 
 The IUCN Red List of Threatened Species was created in to record information on extinction risk statuses for plants, animals, and fungi. It includes information about population sizes, threats, and ecology of each animal that is considered threatened. This project will serve to analyze the geographical distribution of the seven equine species on the Red List and observe if the trends match what would be expected of dominantly Asian equine species. The data set being used to determine this was collected from GBIF and is called the IUCN Red List of Threatened Species. The data will be taken and exploratory data analysis will be used to find equines that are listed on the Red List and then quantitatively summarize their geographic distribution in the years 2010 and 2020 and visualize it. A conclusion will then be drawn as to whether or not the seven species are falling farther into risk or beginning to climb out of it. Finally, a statistical test will determine the significance of the occurrences between 2010 and 2020.
@@ -21,23 +25,212 @@ For this project, all of the data was analyzed and manipulated using RStudio (RS
 
 Finally, the occurrence data for each of the seven species were acquired using the function with the amount limit being set at its maximum to ensure the most accurate information be returned. The search function was applied to each species individually to allow for occurrence searches based on each one's specific scientific name.
 
+```{r}
+library(tidyverse)
+library(rgbif)
+```
+
+```{r}
+taxon <- read_tsv("taxon.txt")
+taxon
+```
+
+
 ### Data Preparation
 
-Beginning with the IUCN List, data was prepared for analysis first by filtering through all the species present on the Red List so that only the equine species were present. This was done by filtering the data to only show species who's family was Equidae. Once the equine species were located, only those that had accepted taxonomic status were selected for. Then, the data was filtered to only show species as opposed to including subspecies and species.
+After loading a few new packages, preparation began with the IUCN List. Data was prepared for analysis first by filtering through all the species present on the Red List so that only the equine species were present. This was done by filtering the data to only show species who's family was Equidae. Once the equine species were located, only those that had accepted taxonomic status were selected for. Then, the data was filtered to only show species as opposed to including subspecies and species.
 
 Next, to make the data easier to navigate several columns not relevant to the goal were removed, leaving only the taxon ID, the genus, and the specific epithet. Once this was finished, this data was used in the previously mentioned acquisition of occurrence data.
 
-Once the occurrence data was acquired, it had to undergo several changes to make it more usable. Firstly, the data had to be transformed from a RGBIF format to a tibble format. Once the data set was placed into tibble format, unnecessary columns were removed. The columns that remained were the scientific Name, the Latitude, the Longitude, the year, and the state province. Once all of the species were refined, their individual tibbles were combined into a master tibble that would allow for collection of all occurrences to be seen together.
+Once the occurrence data was acquired, it had to undergo several changes to make it more usable. Firstly, the data had to be transformed from a RGBIF format to a tibble format. Once the data set was placed into tibble format, unnecessary columns were removed. The columns that remained were the scientific Name, the the year, and the country. Once all of the species were refined, their individual tibbles were combined into a master tibble that would allow for collection of all occurrences to be seen together.
 
-Due to several "not applicable" values, the longitude, latitude and scientific name were removed from the tibble. This left the state province, year, and the number of occurrences remaining.
+The tibbles were combined to list the number of occurrences by country and year.
 
-Finally, due to discrepancies in how each state province was named--such as capitalization, use of unique characters, and abbreviations--the data was manipulated to make all the naming styles uniform. This allowed for cleaning appearances in the graph, and more accurate representation of the distribution of the seven species.
+Finally, due to discrepancies in how each country was named--such as capitalization, use of unique characters, and abbreviations--the data was manipulated to make all the naming styles uniform. This allowed for cleaning appearances in the graph, and more accurate representation of the distribution of the seven species.
 
-Once all the data was organized in a manner that could allow visualization, a bar graph was used to depict the occurrence numbers in relation to state provinces for two different years that were 10 years apart. A second bar graph was created to depict overall trends in occurrences between the two years. A t-test was then performed to determine if the differences between the two years was significant.
+Once all the data was organized in a manner that could allow visualization, a bar graph was used to depict the occurrence numbers for both 2010 and 2020. Two maps were then created to depict a visual distribution of occurrences for both years. A t-test was then performed to determine if the differences between the two years was significant.
+
+```{r}
+library(sf)
+library(maps)
+library(dplyr)
+```
+
+
+```{r}
+equus <- filter(taxon,  family == "EQUIDAE")
+equus
+
+accepted <- filter(equus, taxonomicStatus == "accepted")
+accepted
+
+horses <- filter(accepted, taxonRank == "species")
+horses
+
+table <- select(horses, taxonID, genus, specificEpithet)
+table
+```
+
+```{r}
+equus_africanus <- occ_search(scientificName = "Equus africanus", limit = 100000)
+equus_africanus
+equus_africanus$data
+
+africanus <- select(equus_africanus$data, year, country, countryCode)
+africanus
+
+Afr <- filter(africanus, year == "2010" | year == "2020")
+Afr
+
+equus_kiang <- occ_search(scientificName = "Equus kiang", limit = 100000)
+equus_kiang
+equus_kiang$data
+
+kiang <- select(equus_kiang$data, year, country, countryCode)
+kiang
+
+Kia <- filter(kiang, year == "2010" | year == "2020")
+Kia
+
+equus_quagga <- occ_search(scientificName = "Equus quagga", limit = 100000)
+equus_quagga
+equus_quagga$data
+
+quagga <- select(equus_quagga$data, year, country, countryCode)
+quagga
+
+Qua <- filter(quagga, year == "2010" | year == "2020")
+Qua
+
+equus_grevyi <- occ_search(scientificName = "Equus grevyi", limit = 100000)
+equus_grevyi
+equus_grevyi$data
+
+grevyi <- select(equus_grevyi$data, year, country, countryCode)
+grevyi
+
+Gre <- filter(grevyi, year == "2010" | year == "2020")
+Gre
+
+equus_ferus <- occ_search(scientificName = "Equus ferus", limit = 100000)
+equus_ferus
+equus_ferus$data
+
+ferus <- select(equus_ferus$data, year, country, countryCode)
+ferus
+
+Fer <- filter(ferus, year == "2010" | year == "2020")
+Fer
+
+equus_zebra <- occ_search(scientificName = "Equus zebra", limit = 100000)
+equus_zebra
+equus_zebra$data
+
+zebra <- select(equus_zebra$data, year, country, countryCode)
+zebra
+
+Zeb <- filter(zebra, year == "2010" | year == "2020")
+Zeb
+
+equus_hemionus <- occ_search(scientificName = "Equus hemionus", limit = 100000)
+equus_hemionus
+equus_hemionus$data
+
+hemionus <- select(equus_hemionus$data, year, country, countryCode)
+hemionus
+
+Hem <- filter(hemionus, year == "2010" | year == "2020")
+Hem
+```
+
+```{r}
+Y<- bind_rows(Afr, Kia, Qua, Gre, Fer, Zeb, Hem)
+Y
+
+tbl <- 
+  Y %>% 
+  count(year, country) %>% 
+  arrange(desc(country)) %>% 
+  rename(region = country) %>% 
+  mutate(
+    region = str_replace(region, "United States of America", "USA"),
+    region = str_replace(region, "Tanzania, United Republic of", "Tanzania"),
+    region = str_replace(region, "Iran (Islamic Republic of)", "Iran"),
+    region = str_replace(region, "United Kingdom of Great Britain and Northern Ireland", "UK"),
+    region = str_replace(region, "Eswatini", "Swaziland")
+  ) %>% 
+  print()
+```
+
+```{r}
+Y_occurrences <- count(tbl2, year)
+Y_occurrences
+```
+
+```{r}
+World <- map_data("world")
+World
+
+
+ggplot() + 
+  geom_polygon( data=World, aes(x=long, y=lat, group=group),
+                color="black", fill="lightblue" )
+```
+
+Figure 1. A blank world map to be modified with the occurrence data of the seven equine species.
 
 ## Results
 
+```{r}
+ggplot(data = Y_occurrences) +
+  geom_col(mapping = aes(x = as.factor(year), y = n), fill = "#c5351B",
+           width = .75) +
+  labs(x = "Year", y = "Number of Occurrences") +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black", size = rel(.9)),
+    axis.text.x = element_text(angle = 90, hjust = 1),
+    axis.ticks.x = element_blank()
+  )
+```
+
+Figure 2. A bar graph depicting a comparison of the total countries with occurrences of individuals from equine species on the IUCN Red List for the years of 2010 and 2020.
+
+```{r}
+Merged <- left_join(World, tbl, by = "region")
+
+Merged %>% 
+  filter(year == "2010" | is.na(year)) %>% 
+  ggplot() +
+  geom_polygon(
+    mapping = aes(x = long, y=lat, group=group, fill = n), 
+    color = "black", size = 0.2) +
+    scale_fill_viridis_c(
+    limits = c(1,150),
+    direction = -1
+  )
+```
+
+Figure 3. A map displaying the occurrence distributions of the seven equine species for the year 2010. The color gradient depicts density of occurrences by country. Gray values have no occurrences.
+
+```{r}
+Merged %>% 
+  filter(year == "2020" | is.na(year)) %>% 
+  ggplot() +
+  geom_polygon(
+    mapping = aes(x = long, y=lat, group=group, fill = n), 
+    color = "black", size = 0.2) +
+  scale_fill_viridis_c(
+    limits = c(1,150),
+    direction = -1
+  )
+```
+
+Figure 4. A map displaying the occurrence distributions of the seven equine species for the year 2020. The color gradient depicts density of occurrences by countries. Gray values have no occurrences.
+
 ## Discussion
+
+As an initial observation, both the bar graph and the maps indicate an increase in overall occurrence of the seven equine species. The bar graph indicates that within the ten year span individuals of the seven species began populating multiple new countries and continue to have a population in these new countries. The maps also indicate this by visually highlighting the new countries (
 
 ## Literature Cited
 
