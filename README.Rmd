@@ -48,7 +48,7 @@ The tibbles were combined to list the number of occurrences by country and year.
 
 Finally, due to discrepancies in how each country was named--such as capitalization, use of unique characters, and abbreviations--the data was manipulated to make all the naming styles uniform. This allowed for cleaning appearances in the graph, and more accurate representation of the distribution of the seven species.
 
-Once all the data was organized in a manner that could allow visualization, a bar graph was used to depict the occurrence numbers for both 2010 and 2020. Two maps were then created to depict a visual distribution of occurrences for both years. A t-test was then performed to determine if the differences between the two years was significant.
+Once all the data was organized in a manner that could allow visualization, a bar graph was used to depict the occurrence numbers for both 2010 and 2020. Two maps were then created to depict a visual distribution of occurrences for both years. There were discrepancies between the naming patterns within the map and the data tibble, so the data tibble names were modified to be uniform with that of the map data.
 
 ```{r}
 library(sf)
@@ -150,6 +150,7 @@ Y
 tbl <- 
   Y %>% 
   count(year, country) %>% 
+  complete(year, country, fill = list(n=0)) %>%
   arrange(desc(country)) %>% 
   rename(region = country) %>% 
   mutate(
@@ -163,7 +164,7 @@ tbl <-
 ```
 
 ```{r}
-Y_occurrences <- count(tbl2, year)
+Y_occurrences <- count(tbl, year)
 Y_occurrences
 ```
 
@@ -198,6 +199,7 @@ Figure 2. A bar graph depicting a comparison of the total countries with occurre
 
 ```{r}
 Merged <- left_join(World, tbl, by = "region")
+Merged
 
 Merged %>% 
   filter(year == "2010" | is.na(year)) %>% 
@@ -205,8 +207,8 @@ Merged %>%
   geom_polygon(
     mapping = aes(x = long, y=lat, group=group, fill = n), 
     color = "black", size = 0.2) +
-    scale_fill_viridis_c(
-    limits = c(1,150),
+  scale_fill_viridis_c(
+    limits = c(1,200),
     direction = -1
   )
 ```
@@ -221,7 +223,7 @@ Merged %>%
     mapping = aes(x = long, y=lat, group=group, fill = n), 
     color = "black", size = 0.2) +
   scale_fill_viridis_c(
-    limits = c(1,150),
+    limits = c(1,200),
     direction = -1
   )
 ```
@@ -230,7 +232,7 @@ Figure 4. A map displaying the occurrence distributions of the seven equine spec
 
 ## Discussion
 
-As an initial observation, both the bar graph and the maps indicate an increase in overall occurrence of the seven equine species. The bar graph indicates that within the ten year span individuals of the seven species began populating multiple new countries and continue to have a population in these new countries. The maps also indicate this by visually highlighting the new countries (
+As an initial observation, both the bar graph and the maps indicate an increase in overall occurrence of the seven equine species. The bar graph indicates that within the ten year span individuals of the seven species began populating multiple new countries and continue to have a population in these new countries. The maps also indicate this by visually highlighting the new countries (China, Ethiopia, Israel, Kazakhstan, Malawi, Mozambique, Nigeria, Togo, the UK, and Ukraine). However, it is important to note that some countries that were previously highlighted in 2010, were no longer highlighted in 2020 (Iran and Mongolia). For those countries that can be seen on both there are two contradictory trends. Some show higher occurrences in 2020 over 2010 (the USA, Zimbabwe, Zambia, Uganda, Kenya, South Africa, and Uganda) and others had lower occurrences in 2020 (Botswana, Swaziland, Namibia, and Tanzania). In general, the trend appears to be positive for 202, with more new countries citing occurrences than old countries not citing occurrences and more countries citing higher occurrences than in 2010.
 
 ## Literature Cited
 

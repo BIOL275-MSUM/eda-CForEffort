@@ -157,6 +157,7 @@ Y
 tbl <- 
   Y %>% 
   count(year, country) %>% 
+  complete(year, country, fill = list(n=0)) %>%
   arrange(desc(country)) %>% 
   rename(region = country) %>% 
   mutate(
@@ -219,7 +220,10 @@ Merged %>%
   ggplot() +
   geom_polygon(
     mapping = aes(x = long, y=lat, group=group, fill = n), 
-    color = "black", size = 0.2
+    color = "black", size = 0.2) +
+  scale_fill_viridis_c(
+    limits = c(1,200),
+    direction = -1
   )
 
 
@@ -231,5 +235,8 @@ Merged %>%
   ggplot() +
   geom_polygon(
     mapping = aes(x = long, y=lat, group=group, fill = n), 
-    color = "black", size = 0.2
+    color = "black", size = 0.2) +
+  scale_fill_viridis_c(
+    limits = c(1,200),
+    direction = -1
   )

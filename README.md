@@ -2,7 +2,7 @@ Geographic Distribution Trends Compared to Extinction Risk of Mammals on
 the IUCN Red List
 ================
 Faith
-2021-04-06
+2021-04-08
 
 ## Abstract
 
@@ -85,13 +85,14 @@ searches based on each one’s specific scientific name.
 
 ### Data Preparation
 
-Beginning with the IUCN List, data was prepared for analysis first by
-filtering through all the species present on the Red List so that only
-the equine species were present. This was done by filtering the data to
-only show species who’s family was Equidae. Once the equine species were
-located, only those that had accepted taxonomic status were selected
-for. Then, the data was filtered to only show species as opposed to
-including subspecies and species.
+After loading a few new packages, preparation began with the IUCN List.
+Data was prepared for analysis first by filtering through all the
+species present on the Red List so that only the equine species were
+present. This was done by filtering the data to only show species who’s
+family was Equidae. Once the equine species were located, only those
+that had accepted taxonomic status were selected for. Then, the data was
+filtered to only show species as opposed to including subspecies and
+species.
 
 Next, to make the data easier to navigate several columns not relevant
 to the goal were removed, leaving only the taxon ID, the genus, and the
@@ -119,20 +120,53 @@ the distribution of the seven species.
 Once all the data was organized in a manner that could allow
 visualization, a bar graph was used to depict the occurrence numbers for
 both 2010 and 2020. Two maps were then created to depict a visual
-distribution of occurrences for both years. A t-test was then performed
-to determine if the differences between the two years was significant.
+distribution of occurrences for both years. There were discrepancies
+between the naming patterns within the map and the data tibble, so the
+data tibble names were modified to be uniform with that of the map data.
 
-![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+
+Figure 1. A blank world map to be modified with the occurrence data of
+the seven equine species.
 
 ## Results
 
+![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+
+Figure 2. A bar graph depicting a comparison of the total countries with
+occurrences of individuals from equine species on the IUCN Red List for
+the years of 2010 and 2020.
+
+![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+
+Figure 3. A map displaying the occurrence distributions of the seven
+equine species for the year 2010. The color gradient depicts density of
+occurrences by country. Gray values have no occurrences.
+
 ![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
 
-![](README_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
-
-![](README_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
+Figure 4. A map displaying the occurrence distributions of the seven
+equine species for the year 2020. The color gradient depicts density of
+occurrences by countries. Gray values have no occurrences.
 
 ## Discussion
+
+As an initial observation, both the bar graph and the maps indicate an
+increase in overall occurrence of the seven equine species. The bar
+graph indicates that within the ten year span individuals of the seven
+species began populating multiple new countries and continue to have a
+population in these new countries. The maps also indicate this by
+visually highlighting the new countries (China, Ethiopia, Israel,
+Kazakhstan, Malawi, Mozambique, Nigeria, Togo, the UK, and Ukraine).
+However, it is important to note that some countries that were
+previously highlighted in 2010, were no longer highlighted in 2020 (Iran
+and Mongolia). For those countries that can be seen on both there are
+two contradictory trends. Some show higher occurrences in 2020 over 2010
+(the USA, Zimbabwe, Zambia, Uganda, Kenya, South Africa, and Uganda) and
+others had lower occurrences in 2020 (Botswana, Swaziland, Namibia, and
+Tanzania). In general, the trend appears to be positive for 202, with
+more new countries citing occurrences than old countries not citing
+occurrences and more countries citing higher occurrences than in 2010.
 
 ## Literature Cited
 
