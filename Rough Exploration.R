@@ -34,9 +34,6 @@ horses
 table <- select(horses, taxonID, genus, specificEpithet)
 table
 
-
-
-
 ## locating all occurrences of of equus africanus
 
 equus_africanus <- occ_search(scientificName = "Equus africanus", limit = 100000)
@@ -228,7 +225,7 @@ Merged %>%
 
 
 
-## merge and occurence data map of 2010
+## merge and occurrence data map of 2010
 
 Merged %>% 
   filter(year == "2010" | is.na(year)) %>% 
@@ -240,3 +237,28 @@ Merged %>%
     limits = c(1,200),
     direction = -1
   )
+
+## find the mean and sd of the two years
+
+Y10 <- filter(tbl, year == "2010")
+Y10
+
+Y1 <- summarize(Y10, sampl_size = n(),
+          mean = mean(n),
+          sd = sd(n))
+Y20 <- filter(tbl, year == "2020")
+Y20
+
+Y2 <- summarize(Y20, sampl_size = n(),
+          mean = mean(n),
+          sd = sd(n))
+
+t.test(Y1, Y2)
+
+t = -1.4151, df = 3.5096, p-value = 0.2393
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+  -34.39813  12.02569
+sample estimates:
+  mean of x mean of y 
+15.13234  26.31856 
