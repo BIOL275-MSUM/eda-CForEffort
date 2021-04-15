@@ -262,3 +262,4 @@ alternative hypothesis: true difference in means is not equal to 0
 sample estimates:
   mean of x mean of y 
 15.13234  26.31856 
+

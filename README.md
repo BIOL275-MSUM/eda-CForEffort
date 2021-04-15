@@ -1,10 +1,12 @@
 
-<img src="https://www2.mnstate.edu/uploadedImages/Content/Marketing/logos/MSUM_Signature_Vert_Color.jpg" alt="MSUM logo" width="200" style="float:right">
+<img src="https://www2.mnstate.edu/uploadedImages/Content/Marketing/logos/MSUM_Signature_Vert_Color.jpg" alt="MSUM logo" width="200" style="float:right"/>
 
 # Geographic Distribution Trends Compared to Extinction Risk of Equines on the IUCN Red List
 
-Faith Rude Biosciences Department, Minnesota State University Moorhead,
-1104 7th Avenue South, Moorhead, MN 56563 USA
+Faith Rude \| Chris Merkord
+
+Biosciences Department, Minnesota State University Moorhead, 1104 7th
+Avenue South, Moorhead, MN 56563 USA
 
 ## Abstract
 
@@ -116,19 +118,19 @@ occurrences by country. Gray values have no occurrences.
 
 Figure 4. A map displaying the occurrence distributions of the seven
 equine species for the year 2020. The color gradient depicts density of
-occurrences by countries. Gray values have no occurrences.
+occurrences by countries. Gray countries have have no occurrences.
 
 ## Discussion
 
 Both the bar graph and the maps indicate an increase in occurrences
 between 2010 and 2020. The bar graph indicates more countries citing
-occurrences in 2020. The maps show evidence of greater and fewer
-occurrences between the year 2010 and 2020 depending on the country
-being observed.
+occurrences in 2020. The maps provide a more specific visual on which
+countries and how many occurrences they cite for the years 2010 and
+2020.
 
-In general, the trend appears to be positive for 2020, with more new
-countries citing occurrences than old countries not citing occurrences
-and more countries citing higher occurrences than in 2010.
+In general, the trend appears to be positive for 2020. While there is
+some variation with countries displaying higher or lower occurrences,
+overall more countries appear to display high occurrences rates.
 
 Statistically speaking, the average occurrence per country in 2010 was
 7.70 with a standard deviation of 14.7 with a sample size of 23. In
@@ -136,7 +138,26 @@ Statistically speaking, the average occurrence per country in 2010 was
 size of 23.
 
 A T-Test was run, returning values of t = -1.4151, p = 0.2393, and 3.5
-degrees of freedom.
+degrees of freedom. For 3.5 degrees of freedom the critical value is
+between 1.53-1.64. Our test statistic is significantly smaller than
+either value.
+
+In conclusion, this study indicates no significance in occurrence
+differences between the two years. While the Red List brings awareness
+to the endangered animal species, further and larger studies would need
+to be performed to determine if there is a signficance to the Red List’s
+efforts in aiding population revival over the span of its existence.
+
+Future studies could be performed on a broader scale to include more
+species and determine a large scale trend in population changes for
+endanger animals. In addition, these studies could be performed for
+multiple years to show trends throughout time as opposed to two distinct
+years.
+
+A related study could include analysis on the success of different
+methods for aiding endangered species. These studies could
+quantitatively analyze the effectiveness of assorted programs and
+determine effectiveness of each in regards to their ultimate goal.
 
 ## Literature Cited
 
@@ -149,8 +170,8 @@ GBIF.org (2021), GBIF Home Page. Available from: <https://www.gbif.org>
 
 Chamberlain S, Barve V, Mcglinn D, Oldoni D, Desmet P, Geffert L, Ram K
 (2021). *rgbif: Interface to the Global Biodiversity Information
-Facility API*. R package version 3.5.2, \<URL:
-<https://CRAN.R-project.org/package=rgbif>\>.
+Facility API*. R package version 3.5.2, &lt;URL:
+<https://CRAN.R-project.org/package=rgbif>&gt;.
 
 R Core Team (2020). R: A language and environment for statistical
 computing. R Foundation for Statistical Computing, Vienna, Austria. URL
