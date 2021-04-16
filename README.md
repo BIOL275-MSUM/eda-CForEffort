@@ -122,11 +122,9 @@ occurrences by countries. Gray countries have have no occurrences.
 
 ## Discussion
 
-Both the bar graph and the maps indicate an increase in occurrences
-between 2010 and 2020. The bar graph indicates more countries citing
-occurrences in 2020. The maps provide a more specific visual on which
-countries and how many occurrences they cite for the years 2010 and
-2020.
+The bar graph indicates no difference in number of countries citing
+occurrences, but the maps indicate an increase in occurrences and some
+variation in which countries name occurrences between 2010 and 2020.
 
 In general, the trend appears to be positive for 2020. While there is
 some variation with countries displaying higher or lower occurrences,
@@ -138,15 +136,17 @@ Statistically speaking, the average occurrence per country in 2010 was
 size of 23.
 
 A T-Test was run, returning values of t = -1.4151, p = 0.2393, and 3.5
-degrees of freedom. For 3.5 degrees of freedom the critical value is
-between 1.53-1.64. Our test statistic is significantly smaller than
-either value.
+degrees of freedom. This leads to the end result of not being able to
+draw a conclusion.
 
-In conclusion, this study indicates no significance in occurrence
-differences between the two years. While the Red List brings awareness
-to the endangered animal species, further and larger studies would need
-to be performed to determine if there is a signficance to the Red List’s
-efforts in aiding population revival over the span of its existence.
+This study’s p-value is high enough to possibly lean towards no
+significance between the two years, however it is low enough to be
+possible that there is some level of correlation.
+
+While the Red List aims to bring awareness to the endangered species,
+further studies would need to be performed to determine if there is a
+significance to the Red List’s efforts in aiding population revival over
+the span of its existence.
 
 Future studies could be performed on a broader scale to include more
 species and determine a large scale trend in population changes for
