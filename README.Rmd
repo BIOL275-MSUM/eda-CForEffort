@@ -238,7 +238,7 @@ Y_occurrences <- count(tbl, year)
 Y_occurrences
 ```
 
-```{r }
+```{r fig.height=5, fig.width=9}
 World <- map_data("world")
 World
 
@@ -269,7 +269,7 @@ t.test(Y1, Y2)
 
 ## Results
 
-```{r}
+```{r fig.height=4, fig.width=4}
 ggplot(data = Y_occurrences) +
   geom_col(mapping = aes(x = as.factor(year), y = n), fill = "#c5351B",
            width = .75) +
@@ -286,7 +286,7 @@ Figure 2. A bar graph depicting a comparison of the total countries with
 occurrences of individuals from equine species on the IUCN Red List for
 the years of 2010 and 2020.
 
-```{r}
+```{r fig.height=5, fig.width=9}
 Merged <- left_join(World, tbl, by = "region")
 Merged
 
@@ -306,7 +306,7 @@ Figure 3. A map displaying the occurrence distributions of the seven
 equine species for the year 2010. The color gradient depicts density of
 occurrences by country. Gray values have no occurrences.
 
-```{r}
+```{r fig.height=5, fig.width=9}
 Merged %>% 
   filter(year == "2020" | is.na(year)) %>% 
   ggplot() +
@@ -353,6 +353,8 @@ A related study could include analysis on the success of different
 methods for aiding endangered species. These studies could
 quantitatively analyze the effectiveness of assorted programs and
 determine effectiveness of each in regards to their ultimate goal.
+
+Lastly, If the effects of solely the IUCN's Red List were wanting to be measured, more steps would be required to isolate the IUCN's efforts from other efforts with the same goal.
 
 ## Literature Cited
 

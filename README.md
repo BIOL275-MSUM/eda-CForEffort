@@ -159,6 +159,10 @@ methods for aiding endangered species. These studies could
 quantitatively analyze the effectiveness of assorted programs and
 determine effectiveness of each in regards to their ultimate goal.
 
+Lastly, If the effects of solely the IUCN’s Red List were wanting to be
+measured, more steps would be required to isolate the IUCN’s efforts
+from other efforts with the same goal.
+
 ## Literature Cited
 
 IUCN (2020). The IUCN Red List of Threatened Species. Version 2020-3.
